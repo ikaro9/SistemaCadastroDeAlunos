@@ -21,6 +21,7 @@ public class Menu {
                     3. Buscar por nome
                     4. Buscar por matrícula
                     5. Remover aluno
+                    6. Editar aluno
                     0. Sair do sistema""");
 
             System.out.println("Digite a opção desejada: ");
@@ -42,9 +43,14 @@ public class Menu {
                 case 5:
                     removerAluno();
                     break;
+                case 6:
+                    editarAluno();
+                    break;
                 case 0:
                     System.out.println("Saindo do sistema ...");
                     break;
+                default:
+                    System.out.println("Opção inválida.");
             }
 
         }while(opcao != 0);
@@ -58,6 +64,7 @@ public class Menu {
         System.out.println("Digite o curso do aluno: ");
         String curso = input.nextLine();
         sistema.cadastrarAluno(nome,matricula,curso);
+        System.out.println("Aluno cadastrado com sucesso!");
     }
     public void buscarAlunoNome(){
         System.out.println("Digite o nome do aluno");
@@ -84,11 +91,15 @@ public class Menu {
         }
     }
     public void removerAluno(){
-        System.out.println("Digite o nome do aluno");
-        String nome = input.nextLine();
         System.out.println("Digite a matrícula do aluno");
         String matricula = input.nextLine();
-        sistema.removerAluno(nome,matricula);
+        sistema.removerAluno(matricula);
+
+    }
+    public void editarAluno(){
+        System.out.println("Digite a matrícula do aluno:");
+        String matricula = input.nextLine();
+        sistema.editarAluno(matricula);
     }
 
 }
