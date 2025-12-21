@@ -32,7 +32,7 @@ public class Menu {
                   cadastrarAlunos();
                   break;
                 case 2:
-                  sistema.listarAlunos();
+                  listarAlunos();
                   break;
                 case 3:
                     buscarAlunoNome();
@@ -66,6 +66,14 @@ public class Menu {
         sistema.cadastrarAluno(nome,matricula,curso);
         System.out.println("Aluno cadastrado com sucesso!");
     }
+    public void listarAlunos(){
+        if(sistema.quantAlunos()==0){
+            System.out.println("Não há alunos cadastrados!");
+        }
+        else{
+            sistema.listarAlunos();
+        }
+    }
     public void buscarAlunoNome(){
         System.out.println("Digite o nome do aluno");
         String nome = input.nextLine();
@@ -93,13 +101,58 @@ public class Menu {
     public void removerAluno(){
         System.out.println("Digite a matrícula do aluno");
         String matricula = input.nextLine();
+        Aluno aluno = sistema.buscarAlunoMatricula(matricula);
+        if(aluno == null){
+            System.out.println("Aluno não encontrado");
+            return;
+        }
+        System.out.println(aluno);
+        System.out.println("Tem certeza que deseja remover (S/N)");
+        String opcao = input.nextLine();
+        if(opcao.equalsIgnoreCase("s")){
         sistema.removerAluno(matricula);
-
+            System.out.println("Aluno removido com sucesso!");
+        }
+        else{
+            System.out.println("Aluno não removido");
+        }
     }
-    public void editarAluno(){
+    public void editarAluno() {
         System.out.println("Digite a matrícula do aluno:");
         String matricula = input.nextLine();
-        sistema.editarAluno(matricula);
+        Aluno aluno = sistema.buscarAlunoMatricula(matricula);
+        if(aluno==null){
+            System.out.println("Aluno não encontrado!");
+            return;
+        }
+            System.out.println("Digite o que deseja alterar");
+            System.out.println("""
+                    1. Nome
+                    2. Matrícula
+                    3. Curso""");
+            int opcao = input.nextInt();
+            input.nextLine();
+            switch (opcao) {
+                case 1:
+                    System.out.println("Digite o novo nome: ");
+                    String novoNome = input.nextLine();
+                    sistema.editarNome(matricula, novoNome);
+                    System.out.println("Nome alterado.");
+                    break;
+                case 2:
+                    System.out.println("Digite a nova matricula: ");
+                    String novaMatricula = input.nextLine();
+                    sistema.editarMatricula(matricula, novaMatricula);
+                    break;
+                case 3:
+                    System.out.println("Digite o novo curso: ");
+                    String novoCurso = input.nextLine();
+                    sistema.editarCurso(matricula, novoCurso);
+                    break;
+
+                default:
+                    System.out.println("Opção inválida");
+            }
     }
 
 }
