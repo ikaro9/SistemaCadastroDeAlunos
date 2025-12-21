@@ -75,4 +75,7 @@ public class Sistema {
         }
         return null;
     }
+    public boolean validarMatricula (String matricula){
+        return matricula.length() == 10;
+    }
 }

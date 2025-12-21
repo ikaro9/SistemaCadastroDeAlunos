@@ -59,8 +59,14 @@ public class Menu {
     public void cadastrarAlunos(){
         System.out.println("Digite o nome do aluno: ");
         String nome = input.nextLine();
-        System.out.println("Digite a matrícula do aluno: ");
-       String matricula = input.nextLine();
+        String matricula;
+        do {
+            System.out.println("Digite a matrícula do aluno: ");
+            matricula = input.nextLine();
+            if (!sistema.validarMatricula(matricula)) {
+                System.out.println("Matrícula inválida! A matricula deve ter 10 digitos.");
+            }
+        }while(!sistema.validarMatricula(matricula));
         System.out.println("Digite o curso do aluno: ");
         String curso = input.nextLine();
         sistema.cadastrarAluno(nome,matricula,curso);
@@ -125,6 +131,7 @@ public class Menu {
             System.out.println("Aluno não encontrado!");
             return;
         }
+        System.out.println(aluno);
             System.out.println("Digite o que deseja alterar");
             System.out.println("""
                     1. Nome
@@ -140,14 +147,25 @@ public class Menu {
                     System.out.println("Nome alterado.");
                     break;
                 case 2:
-                    System.out.println("Digite a nova matricula: ");
-                    String novaMatricula = input.nextLine();
+                    String novaMatricula;
+                   do {
+                       System.out.println("Digite a nova matricula: ");
+                      novaMatricula = input.nextLine();
+                       if (!sistema.validarMatricula(novaMatricula)) {
+                           System.out.println("Matrícula inválida! A matricula deve ter 10 digitos.");
+                       }
+                       ;
+                   }while(!sistema.validarMatricula(novaMatricula));
                     sistema.editarMatricula(matricula, novaMatricula);
+                    System.out.println("Matrícula alterada.");
+
                     break;
                 case 3:
                     System.out.println("Digite o novo curso: ");
                     String novoCurso = input.nextLine();
                     sistema.editarCurso(matricula, novoCurso);
+                    System.out.println("Curso alterado alterado.");
+
                     break;
 
                 default:
