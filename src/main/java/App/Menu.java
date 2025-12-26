@@ -57,14 +57,14 @@ public class Menu {
     }
 
     public void cadastrarAlunos(){
-        System.out.println("Digite o nome do aluno: ");
+        System.out.println("Digite o nome completo do aluno: ");
         String nome = input.nextLine();
         String matricula;
         do {
             System.out.println("Digite a matrícula do aluno: ");
             matricula = input.nextLine();
             if (!sistema.validarMatricula(matricula)) {
-                System.out.println("Matrícula inválida! A matricula deve ter 10 digitos.");
+                System.out.println("Matrícula inválida! A matricula deve ser uma sequência com 10 digitos.");
             }
         }while(!sistema.validarMatricula(matricula));
         System.out.println("Digite o curso do aluno: ");
@@ -81,7 +81,7 @@ public class Menu {
         }
     }
     public void buscarAlunoNome(){
-        System.out.println("Digite o nome do aluno");
+        System.out.println("Digite o nome completo do aluno");
         String nome = input.nextLine();
         Aluno aluno = sistema.buscarAlunoNome(nome);
         if(aluno == null){
@@ -141,7 +141,7 @@ public class Menu {
             input.nextLine();
             switch (opcao) {
                 case 1:
-                    System.out.println("Digite o novo nome: ");
+                    System.out.println("Digite o novo nome completo do aluno: ");
                     String novoNome = input.nextLine();
                     sistema.editarNome(matricula, novoNome);
                     System.out.println("Nome alterado.");
@@ -153,8 +153,8 @@ public class Menu {
                       novaMatricula = input.nextLine();
                        if (!sistema.validarMatricula(novaMatricula)) {
                            System.out.println("Matrícula inválida! A matricula deve ter 10 digitos.");
+
                        }
-                       ;
                    }while(!sistema.validarMatricula(novaMatricula));
                     sistema.editarMatricula(matricula, novaMatricula);
                     System.out.println("Matrícula alterada.");

@@ -76,6 +76,6 @@ public class Sistema {
         return null;
     }
     public boolean validarMatricula (String matricula){
-        return matricula.length() == 10;
+        return matricula != null && matricula.matches("\\d{10}");
     }
 }
